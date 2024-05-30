@@ -5,6 +5,22 @@ function removeMiddleElement(arr) {
   return arr1.concat(arr2);
 }
 
-const a = removeMiddleElement([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+function countTrue(arr) {
+  return arr.filter((x) => x === true).length;
+}
 
-console.log(a);
+function toArray(obj) {
+  const len = Object.keys(obj).length;
+  const arr = Array(len).fill("");
+
+  const arr1 = Object.keys(obj);
+  const arr2 = Object.values(obj);
+
+  for (let i = 0; i < len; i++) {
+    arr[i] = [arr1[i], arr2[i]];
+  }
+
+  return arr;
+}
+
+console.log(toArray({ a: 1, b: 2, c: 3, d: 4 }));
