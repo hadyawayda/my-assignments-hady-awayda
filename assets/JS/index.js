@@ -23,4 +23,21 @@ function toArray(obj) {
   return arr;
 }
 
-console.log(toArray({ a: 1, b: 2, c: 3, d: 4 }));
+function luckyNumbers(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].toString().includes("7")) {
+      return "LUCKY";
+    }
+  }
+  return "there is no 7 in the array :(";
+}
+
+function oddishOrEvenish(num) {
+  let sum = 0;
+
+  for (let i = 0; i < num.toString().length; i++) {
+    sum += parseInt(num.toString()[i]);
+  }
+
+  return sum % 2 === 0 ? "Evenish" : "Oddish";
+}
