@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stairs Builder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+      .stairs-container {
+        margin-top: 20px;
+      }
+      .stairs-step {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      .step {
+        width: 30px;
+        height: 30px;
+        margin-right: 2px;
+        background-color: #cccccc;
+        border: 1px solid #999999;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .destroy-button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="stairsForm">
+      <label for="numberInput">Select number of stairs:</label>
+      <select id="numberInput" required>
+        <option value="" disabled selected>Select a number</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button type="button" id="buildButton" onclick="buildStairs()">
+        Build
+      </button>
+      <button type="button" id="appendButton" onclick="appendStairs()">
+        Append
+      </button>
+    </form>
+    <div class="stairs-container" id="stairsContainer"></div>
+
+    <script>
+      const buildButton = document.getElementById("buildButton");
+      const appendButton = document.getElementById("appendButton");
+      const stairsContainer = document.getElementById("stairsContainer");
+
+      function buildStairs() {
+        const num = parseInt(document.getElementById("numberInput").value);
+        if (isNaN(num) || num < 1 || num > 5) return;
+        stairsContainer.innerHTML = "";
+        for (let i = 1; i <= num; i++) {
+          createStairStep(i);
+        }
+        updateButtons();
+      }
+
+      function appendStairs() {
+        const num = parseInt(document.getElementById("numberInput").value);
+        if (isNaN(num) || num < 1 || num > 5) return;
+        const currentStairs = stairsContainer.children.length;
+        for (let i = 1; i <= num; i++) {
+          createStairStep(currentStairs + i);
+        }
+        updateButtons();
+      }
+
+      function destroyStairs(stepElement) {
+        stepElement.remove();
+        updateButtons();
+      }
+
+      function createStairStep(stepNumber) {
+        const stepContainer = document.createElement("div");
+        stepContainer.className = "stairs-step";
+
+        for (let i = 0; i < stepNumber; i++) {
+          const step = document.createElement("div");
+          step.className = "step";
+          stepContainer.appendChild(step);
+        }
+
+        const destroyButton = document.createElement("button");
+        destroyButton.textContent = "Destroy";
+        destroyButton.className = "destroy-button";
+        destroyButton.onclick = () => destroyStairs(stepContainer);
+
+        stepContainer.appendChild(destroyButton);
+        stairsContainer.appendChild(stepContainer);
+      }
+
+      function updateButtons() {
+        const hasStairs = stairsContainer.children.length > 0;
+        buildButton.disabled = hasStairs;
+        appendButton.disabled = !hasStairs;
+      }
+
+      document
+        .getElementById("stairsForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+        });
+
+      updateButtons();
+    </script>
+  </body>
+</html>
