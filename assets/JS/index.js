@@ -51,3 +51,33 @@ function reverseOdd(str) {
   }
   return arr.join(" ");
 }
+
+function getHashTags(str) {
+  let arr = str.split(" ");
+  let map = new Map();
+  let result = [];
+  let longest = (secondLongest = thirdLongest = "");
+
+  for (let i = 0; i < arr.length; i++) {
+    map.set(arr[i], arr[i].length);
+  }
+
+  for (let [word, length] of map) {
+    if (length > longest.length) {
+      thirdLongest = secondLongest;
+      secondLongest = longest;
+      longest = word;
+    } else if (length > secondLongest.length) {
+      thirdLongest = secondLongest;
+      secondLongest = word;
+    } else if (length > thirdLongest.length) {
+      thirdLongest = word;
+    }
+  }
+
+  if (longest) result.push(longest);
+  if (secondLongest) result.push(secondLongest);
+  if (thirdLongest) result.push(thirdLongest);
+
+  return result;
+}
