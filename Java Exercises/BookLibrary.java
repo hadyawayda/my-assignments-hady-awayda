@@ -4,6 +4,7 @@ import java.util.Scanner;
 class BookLibrary {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        
         while (true) {
             System.out.println("Hello there! Enter your choice:");
             System.out.println("1. Fiction");
@@ -11,6 +12,7 @@ class BookLibrary {
             System.out.println("3. List Books");
             System.out.println("4. Exit");
             String userInput = scan.nextLine();
+
             if ("Exit".toLowerCase().equals(userInput) || "4".equals(userInput)) break;
             else if ("fiction".equals(userInput.toLowerCase()) || "1".equals(userInput))
             {
@@ -94,7 +96,7 @@ abstract class Book {
         return year;
     }
 
-    public abstract String getDetails();
+    public abstract void getDetails();
 }
 
 class Fiction extends Book {
@@ -103,8 +105,15 @@ class Fiction extends Book {
     }
 
     @Override
-    public String getDetails() {
-        return "Fiction Book - Title: " + getTitle() + ", Author: " + getAuthor() + ", Year: " + getYear();
+    public void getDetails() {
+		StringBuilder out = new StringBuilder("Fiction Book Title: ");
+        out.append(getTitle());
+        out.append(", Author: ");
+        out.append(getAuthor());
+        out.append(", Year: ");
+        out.append(getYear());
+
+        System.out.println(out);
     }
 }
 
@@ -114,10 +123,16 @@ class NonFiction extends Book {
     }
 
     @Override
-    public String getDetails() {
-        return "NonFiction Book - Title: " + getTitle() + ", Author: " + getAuthor() + ", Year: " + getYear();
+    public void getDetails() {
+		StringBuilder out = new StringBuilder("NonFiction Book Title: ");
+        out.append(getTitle());
+        out.append(", Author: ");
+        out.append(getAuthor());
+        out.append(", Year: ");
+        out.append(getYear());
 
-    }
+        System.out.println(out);
+        }
 }
 
 class Library {
@@ -129,7 +144,7 @@ class Library {
 
     public static void displayBooks() {
         for (Book book: books) {
-            System.out.println(book.getDetails());
+            book.getDetails();
         }
     }
 }
