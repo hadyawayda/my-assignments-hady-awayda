@@ -1,0 +1,126 @@
+:root {
+  --primary-color: #333;
+  --secondary-color: #f8f8f8;
+  --font-family: "Roboto", sans-serif;
+  --spacing: 10px;
+  --transition-duration: 0.3s;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header,
+footer {
+  background-color: var(--secondary-color);
+  padding: var(--spacing);
+  text-align: center;
+}
+
+header h1::before {
+  font-family: "Font Awesome 5 Free";
+  padding-right: var(--spacing);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+nav a {
+  margin: 0 var(--spacing);
+  padding: var(--spacing);
+  text-decoration: none;
+  color: white;
+  transition: color var(--transition-duration);
+}
+
+nav a:hover {
+  color: #ccc;
+}
+
+main {
+  flex: 1;
+  padding: var(--spacing);
+}
+
+section {
+  margin-bottom: var(--spacing);
+}
+
+h1,
+h2 {
+  color: var(--primary-color);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li::before {
+  font-family: "Font Awesome 5 Free";
+  margin-right: var(--spacing);
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    flex-direction: row;
+  }
+
+  nav {
+    flex-direction: column;
+    width: 200px;
+    height: 100%;
+  }
+
+  main {
+    flex: 1;
+  }
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: var(--spacing);
+  cursor: pointer;
+  transition: background-color var(--transition-duration);
+}
+
+button:hover {
+  background-color: #555;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#history p {
+  animation: fadeIn 2s ease-in-out;
+}
